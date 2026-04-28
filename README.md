@@ -97,7 +97,7 @@ Let's create a hello-world plugin.
 ### Prerequisite
 Install the following tools:
 
-- `knqyf263/go-plugin` (See `Installation`)
+- `runtime-radar/go-plugin` (See `Installation`)
 - [protoc][protoc]
 - [Go][go-installation]
 
@@ -108,7 +108,7 @@ Create `greeting.proto`.
 syntax = "proto3";
 package greeting;
 
-option go_package = "github.com/knqyf263/go-plugin/examples/helloworld/greeting";
+option go_package = "github.com/runtime-radar/go-plugin/examples/helloworld/greeting";
 
 // The greeting service definition.
 // go:plugin type=plugin version=1
@@ -370,13 +370,13 @@ A plugin author can use OCI registries such as GitHub Container registry (GHCR) 
 Push:
 
 ```shell
-$ oras push ghcr.io/knqyf263/my-plugin:latest plugin.wasm:application/vnd.module.wasm.content.layer.v1+wasm
+$ oras push ghcr.io/runtime-radar/my-plugin:latest plugin.wasm:application/vnd.module.wasm.content.layer.v1+wasm
 ```
 
 Pull:
 
 ```shell
-$ oras pull ghcr.io/knqyf263/my-plugin:latest
+$ oras pull ghcr.io/runtime-radar/my-plugin:latest
 ```
 
 ## Under the hood
@@ -399,7 +399,7 @@ Now that Go supports WASI (wasip1), I haven't fully verified if Protocol Buffers
 This is an area that needs further testing and validation.
 
 ### Why replacing known types with custom ones?
-You might be aware that your generated code imports [github.com/knqyf263/go-plugin/types/known][go-plugin-known], not [github.com/protocolbuffers/protobuf-go/types/known][protobuf-go-known] when you import types from `google/protobuf/xxx.proto` (a.k.a well-known types) in your proto file.
+You might be aware that your generated code imports [github.com/runtime-radar/go-plugin/types/known][go-plugin-known], not [github.com/protocolbuffers/protobuf-go/types/known][protobuf-go-known] when you import types from `google/protobuf/xxx.proto` (a.k.a well-known types) in your proto file.
 As described above, `TinyGo` cannot compile `github.com/protocolbuffers/protobuf-go/types/known` since those types use reflection.
 `go-plugin` provides well-known types compatible with TinyGo and use them.
 With the release of Go 1.24, which [has improved Wasm support](https://go.dev/blog/wasmexport), these workarounds might no longer be necessary. However, I haven't fully verified this yet.
@@ -506,15 +506,15 @@ Welcome your contribution :)
 
 [go-installation]: https://go.dev/doc/install
 
-[hello-world]: https://github.com/knqyf263/go-plugin/tree/1ebeeca373affc319802989c0fe6304f014861c4/examples/helloworld
-[go-plugin-known]: https://github.com/knqyf263/go-plugin/tree/1ebeeca373affc319802989c0fe6304f014861c4/types/known
+[hello-world]: https://github.com/runtime-radar/go-plugin/tree/1ebeeca373affc319802989c0fe6304f014861c4/examples/helloworld
+[go-plugin-known]: https://github.com/runtime-radar/go-plugin/tree/1ebeeca373affc319802989c0fe6304f014861c4/types/known
 
 [wasi]: https://github.com/WebAssembly/WASI
 [wasi_snapshot_preview1]: https://github.com/WebAssembly/WASI/blob/snapshot-01/phases/snapshot/docs.md
 
-[wasi-example]: https://github.com/knqyf263/go-plugin/tree/main/examples/wasi
-[host-functions-example]: https://github.com/knqyf263/go-plugin/tree/main/examples/host-functions
+[wasi-example]: https://github.com/runtime-radar/go-plugin/tree/main/examples/wasi
+[host-functions-example]: https://github.com/runtime-radar/go-plugin/tree/main/examples/host-functions
 
-[releases]: https://github.com/knqyf263/go-plugin/releases
+[releases]: https://github.com/runtime-radar/go-plugin/releases
 
 [semver]: https://semver.org/

@@ -12,7 +12,7 @@ import (
 	context "context"
 	errors "errors"
 	fmt "fmt"
-	bar "github.com/knqyf263/go-plugin/tests/import/proto/bar"
+	bar "github.com/runtime-radar/go-plugin/tests/import/proto/bar"
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"

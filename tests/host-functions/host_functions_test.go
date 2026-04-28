@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/knqyf263/go-plugin/tests/host-functions/proto"
+	"github.com/runtime-radar/go-plugin/tests/host-functions/proto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/tetratelabs/wazero"

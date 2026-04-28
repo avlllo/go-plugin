@@ -10,8 +10,8 @@ package greeting
 
 import (
 	context "context"
-	emptypb "github.com/knqyf263/go-plugin/types/known/emptypb"
-	wasm "github.com/knqyf263/go-plugin/wasm"
+	emptypb "github.com/runtime-radar/go-plugin/types/known/emptypb"
+	wasm "github.com/runtime-radar/go-plugin/wasm"
 	_ "unsafe"
 )
 

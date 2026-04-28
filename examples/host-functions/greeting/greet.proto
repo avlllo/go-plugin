@@ -3,7 +3,7 @@ package greeting;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/knqyf263/go-plugin/examples/host-functions/greeting";
+option go_package = "github.com/runtime-radar/go-plugin/examples/host-functions/greeting";
 
 // The greeting service definition.
 // go:plugin type=plugin version=1

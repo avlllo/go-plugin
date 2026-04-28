@@ -7,7 +7,7 @@ import (
 
 	"github.com/tetratelabs/wazero"
 
-	"github.com/knqyf263/go-plugin/tests/host-functions/proto"
+	"github.com/runtime-radar/go-plugin/tests/host-functions/proto"
 )
 
 func BenchmarkHostFunctions(b *testing.B) {

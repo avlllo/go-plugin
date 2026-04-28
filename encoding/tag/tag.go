@@ -13,7 +13,7 @@ import (
 
 	"google.golang.org/protobuf/reflect/protoreflect"
 
-	"github.com/knqyf263/go-plugin/encoding/defval"
+	"github.com/runtime-radar/go-plugin/encoding/defval"
 )
 
 var byteType = reflect.TypeOf(byte(0))

@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/knqyf263/go-plugin/tests/host-functions/proto"
+	"github.com/runtime-radar/go-plugin/tests/host-functions/proto"
 )
 
 // main is required for Go to compile to Wasm.

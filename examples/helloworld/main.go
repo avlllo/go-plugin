@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/knqyf263/go-plugin/examples/helloworld/greeting"
+	"github.com/runtime-radar/go-plugin/examples/helloworld/greeting"
 )
 
 //go:generate go build -o plugin-morning/morning.wasm -buildmode=c-shared plugin-morning/morning.go

@@ -25,7 +25,7 @@ Generate code.
 $ protoc --go-plugin_out=. --go-plugin_opt=paths=source_relative known/known.proto
 ```
 
-NOTE: The generated code imports packages under https://github.com/knqyf263/go-plugin/tree/main/types/known.
+NOTE: The generated code imports packages under https://github.com/runtime-radar/go-plugin/tree/main/types/known.
 TinyGo cannot compile packages under https://github.com/protocolbuffers/protobuf-go/tree/master/types/known.
 
 ## Compile a plugin

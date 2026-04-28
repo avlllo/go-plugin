@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/knqyf263/go-plugin/examples/known-types/known"
-	"github.com/knqyf263/go-plugin/types/known/durationpb"
+	"github.com/runtime-radar/go-plugin/examples/known-types/known"
+	"github.com/runtime-radar/go-plugin/types/known/durationpb"
 )
 
 // main is required for Go to compile to Wasm.

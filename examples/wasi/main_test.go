@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	"github.com/knqyf263/go-plugin/tests"
+	"github.com/runtime-radar/go-plugin/tests"
 	"github.com/stretchr/testify/assert"
 )
 

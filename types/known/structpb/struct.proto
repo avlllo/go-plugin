@@ -7,7 +7,7 @@ syntax = "proto3";
 
 package google.protobuf;
 
-option go_package = "github.com/knqyf263/go-plugin/types/known/structpb";
+option go_package = "github.com/runtime-radar/go-plugin/types/known/structpb";
 
 // `Struct` represents a structured data value, consisting of fields
 // which map to dynamically typed values. In some languages, `Struct`

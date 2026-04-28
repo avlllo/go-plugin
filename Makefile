@@ -3,7 +3,7 @@ GOBIN := $(if $(GOPATH),$(GOPATH)/bin,/usr/local/bin)
 
 go_sources := $(shell find cmd encoding gen genid version wasm -name "*.go")
 ifdef VERSION
-	LDFLAGS := -ldflags="-X github.com/knqyf263/go-plugin/version.Version=${VERSION}"
+	LDFLAGS := -ldflags="-X github.com/runtime-radar/go-plugin/version.Version=${VERSION}"
 endif
 
 .PHONY: build

@@ -7,7 +7,7 @@ syntax = "proto3";
 
 package google.protobuf;
 
-option go_package = "github.com/knqyf263/go-plugin/types/known/durationpb";
+option go_package = "github.com/runtime-radar/go-plugin/types/known/durationpb";
 
 // A Duration represents a signed, fixed-length span of time represented
 // as a count of seconds and fractions of seconds at nanosecond

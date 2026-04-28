@@ -12,8 +12,8 @@
 package typepb
 
 import (
-	anypb "github.com/knqyf263/go-plugin/types/known/anypb"
-	sourcecontextpb "github.com/knqyf263/go-plugin/types/known/sourcecontextpb"
+	anypb "github.com/runtime-radar/go-plugin/types/known/anypb"
+	sourcecontextpb "github.com/runtime-radar/go-plugin/types/known/sourcecontextpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )

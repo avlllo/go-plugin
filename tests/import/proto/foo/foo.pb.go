@@ -8,7 +8,7 @@ package foo
 
 import (
 	context "context"
-	bar "github.com/knqyf263/go-plugin/tests/import/proto/bar"
+	bar "github.com/runtime-radar/go-plugin/tests/import/proto/bar"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )

@@ -24,9 +24,9 @@ import (
 	"google.golang.org/protobuf/types/descriptorpb"
 	"google.golang.org/protobuf/types/pluginpb"
 
-	"github.com/knqyf263/go-plugin/encoding/tag"
-	"github.com/knqyf263/go-plugin/genid"
-	"github.com/knqyf263/go-plugin/version"
+	"github.com/runtime-radar/go-plugin/encoding/tag"
+	"github.com/runtime-radar/go-plugin/genid"
+	"github.com/runtime-radar/go-plugin/version"
 )
 
 // SupportedFeatures reports the set of supported protobuf language features.
@@ -76,7 +76,7 @@ var (
 	wazeroSysPackage  goImportPath = protogen.GoImportPath("github.com/tetratelabs/wazero/sys")
 	wazeroWasiPackage goImportPath = protogen.GoImportPath("github.com/tetratelabs/wazero/imports/wasi_snapshot_preview1")
 
-	pluginWasmPackage goImportPath = protogen.GoImportPath("github.com/knqyf263/go-plugin/wasm")
+	pluginWasmPackage goImportPath = protogen.GoImportPath("github.com/runtime-radar/go-plugin/wasm")
 )
 
 type goImportPath interface {
@@ -136,7 +136,7 @@ func replaceImport(m *protogen.Message) {
 	if strings.HasPrefix(string(m.GoIdent.GoImportPath), knownTypesPrefix) {
 		m.GoIdent.GoImportPath = protogen.GoImportPath(
 			strings.ReplaceAll(string(m.GoIdent.GoImportPath),
-				knownTypesPrefix, "github.com/knqyf263/go-plugin/types/known/"),
+				knownTypesPrefix, "github.com/runtime-radar/go-plugin/types/known/"),
 		)
 	}
 }

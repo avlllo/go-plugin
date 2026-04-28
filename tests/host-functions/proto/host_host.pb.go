@@ -12,7 +12,7 @@ import (
 	context "context"
 	errors "errors"
 	fmt "fmt"
-	wasm "github.com/knqyf263/go-plugin/wasm"
+	wasm "github.com/runtime-radar/go-plugin/wasm"
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"

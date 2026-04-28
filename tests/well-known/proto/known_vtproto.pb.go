@@ -8,10 +8,10 @@ package proto
 
 import (
 	fmt "fmt"
-	durationpb "github.com/knqyf263/go-plugin/types/known/durationpb"
-	structpb "github.com/knqyf263/go-plugin/types/known/structpb"
-	timestamppb "github.com/knqyf263/go-plugin/types/known/timestamppb"
-	wrapperspb "github.com/knqyf263/go-plugin/types/known/wrapperspb"
+	durationpb "github.com/runtime-radar/go-plugin/types/known/durationpb"
+	structpb "github.com/runtime-radar/go-plugin/types/known/structpb"
+	timestamppb "github.com/runtime-radar/go-plugin/types/known/timestamppb"
+	wrapperspb "github.com/runtime-radar/go-plugin/types/known/wrapperspb"
 	proto "google.golang.org/protobuf/proto"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	io "io"

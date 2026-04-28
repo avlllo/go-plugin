@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/knqyf263/go-plugin/tests/import/proto/bar"
-	"github.com/knqyf263/go-plugin/tests/import/proto/foo"
+	"github.com/runtime-radar/go-plugin/tests/import/proto/bar"
+	"github.com/runtime-radar/go-plugin/tests/import/proto/foo"
 )
 
 func TestImport(t *testing.T) {

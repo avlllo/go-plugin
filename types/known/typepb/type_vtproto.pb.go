@@ -13,8 +13,8 @@ package typepb
 
 import (
 	fmt "fmt"
-	anypb "github.com/knqyf263/go-plugin/types/known/anypb"
-	sourcecontextpb "github.com/knqyf263/go-plugin/types/known/sourcecontextpb"
+	anypb "github.com/runtime-radar/go-plugin/types/known/anypb"
+	sourcecontextpb "github.com/runtime-radar/go-plugin/types/known/sourcecontextpb"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	io "io"
 	bits "math/bits"

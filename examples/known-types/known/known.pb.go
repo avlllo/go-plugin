@@ -8,9 +8,9 @@ package known
 
 import (
 	context "context"
-	durationpb "github.com/knqyf263/go-plugin/types/known/durationpb"
-	structpb "github.com/knqyf263/go-plugin/types/known/structpb"
-	timestamppb "github.com/knqyf263/go-plugin/types/known/timestamppb"
+	durationpb "github.com/runtime-radar/go-plugin/types/known/durationpb"
+	structpb "github.com/runtime-radar/go-plugin/types/known/structpb"
+	timestamppb "github.com/runtime-radar/go-plugin/types/known/timestamppb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )

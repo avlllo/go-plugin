@@ -1,7 +1,7 @@
 syntax = "proto3";
 package fs;
 
-option go_package = "github.com/knqyf263/go-plugin/examples/wasi/cat";
+option go_package = "github.com/runtime-radar/go-plugin/examples/wasi/cat";
 
 // go:plugin type=plugin
 service FileCat {

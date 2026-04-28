@@ -1,7 +1,7 @@
 syntax = "proto3";
 package host;
 
-option go_package = "github.com/knqyf263/go-plugin/tests/import-host-functions/proto";
+option go_package = "github.com/runtime-radar/go-plugin/tests/import-host-functions/proto";
 
 // The greeting service definition.
 // go:plugin type=plugin version=1

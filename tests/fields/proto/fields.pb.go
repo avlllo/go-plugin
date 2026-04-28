@@ -8,7 +8,7 @@ package proto
 
 import (
 	context "context"
-	emptypb "github.com/knqyf263/go-plugin/types/known/emptypb"
+	emptypb "github.com/runtime-radar/go-plugin/types/known/emptypb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )

@@ -10,7 +10,7 @@ package foo
 
 import (
 	context "context"
-	wasm "github.com/knqyf263/go-plugin/wasm"
+	wasm "github.com/runtime-radar/go-plugin/wasm"
 )
 
 const FooPluginAPIVersion = 1

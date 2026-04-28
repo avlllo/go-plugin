@@ -6,7 +6,7 @@ import (
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/types/pluginpb"
 
-	"github.com/knqyf263/go-plugin/gen"
+	"github.com/runtime-radar/go-plugin/gen"
 )
 
 func main() {

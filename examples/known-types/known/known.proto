@@ -5,7 +5,7 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
-option go_package = "github.com/knqyf263/go-plugin/examples/well-known/known";
+option go_package = "github.com/runtime-radar/go-plugin/examples/well-known/known";
 
 // The greeting service definition.
 // go:plugin type=plugin

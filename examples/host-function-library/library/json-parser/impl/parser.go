@@ -3,7 +3,7 @@ package impl
 import (
 	"context"
 	"encoding/json"
-	"github.com/knqyf263/go-plugin/examples/host-function-library/library/json-parser/export"
+	"github.com/runtime-radar/go-plugin/examples/host-function-library/library/json-parser/export"
 )
 
 var _ export.ParserLibrary = (*ParserLibraryImpl)(nil)

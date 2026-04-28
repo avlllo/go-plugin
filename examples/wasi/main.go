@@ -10,7 +10,7 @@ import (
 
 	"github.com/tetratelabs/wazero"
 
-	"github.com/knqyf263/go-plugin/examples/wasi/cat"
+	"github.com/runtime-radar/go-plugin/examples/wasi/cat"
 )
 
 //go:embed testdata/hello.txt

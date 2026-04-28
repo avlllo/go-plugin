@@ -13,7 +13,7 @@ A host can control which files/dirs plugins can access.
 
 ```go
 import (
-    "github.com/knqyf263/go-plugin/options"
+    "github.com/runtime-radar/go-plugin/options"
 )
 
 //go:embed testdata/hello.txt

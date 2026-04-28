@@ -12,7 +12,7 @@ import (
 	context "context"
 	errors "errors"
 	fmt "fmt"
-	emptypb "github.com/knqyf263/go-plugin/types/known/emptypb"
+	emptypb "github.com/runtime-radar/go-plugin/types/known/emptypb"
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"

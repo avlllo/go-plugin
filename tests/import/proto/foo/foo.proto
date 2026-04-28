@@ -3,7 +3,7 @@ package foo;
 
 import "tests/import/proto/bar/bar.proto";
 
-option go_package = "github.com/knqyf263/go-plugin/tests/import/proto/foo";
+option go_package = "github.com/runtime-radar/go-plugin/tests/import/proto/foo";
 
 // go:plugin type=plugin version=1
 service Foo {

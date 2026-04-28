@@ -7,7 +7,7 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-option go_package = "github.com/knqyf263/go-plugin/test/well-known/proto";
+option go_package = "github.com/runtime-radar/go-plugin/test/well-known/proto";
 
 // go:plugin type=plugin version=1
 service KnownTypesTest {

@@ -8,12 +8,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/knqyf263/go-plugin/tests/well-known/proto"
-	"github.com/knqyf263/go-plugin/types/known/durationpb"
-	"github.com/knqyf263/go-plugin/types/known/emptypb"
-	"github.com/knqyf263/go-plugin/types/known/structpb"
-	"github.com/knqyf263/go-plugin/types/known/timestamppb"
-	"github.com/knqyf263/go-plugin/types/known/wrapperspb"
+	"github.com/runtime-radar/go-plugin/tests/well-known/proto"
+	"github.com/runtime-radar/go-plugin/types/known/durationpb"
+	"github.com/runtime-radar/go-plugin/types/known/emptypb"
+	"github.com/runtime-radar/go-plugin/types/known/structpb"
+	"github.com/runtime-radar/go-plugin/types/known/timestamppb"
+	"github.com/runtime-radar/go-plugin/types/known/wrapperspb"
 )
 
 func TestWellKnownTypes(t *testing.T) {

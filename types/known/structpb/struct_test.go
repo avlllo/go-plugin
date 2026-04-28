@@ -7,7 +7,7 @@ import (
 	"math"
 	"testing"
 
-	spb "github.com/knqyf263/go-plugin/types/known/structpb"
+	spb "github.com/runtime-radar/go-plugin/types/known/structpb"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )

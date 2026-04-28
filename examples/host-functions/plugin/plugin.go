@@ -5,7 +5,7 @@ package main
 import (
 	"context"
 
-	"github.com/knqyf263/go-plugin/examples/host-functions/greeting"
+	"github.com/runtime-radar/go-plugin/examples/host-functions/greeting"
 )
 
 // main is required for Go to compile to Wasm.

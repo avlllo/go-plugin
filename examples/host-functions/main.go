@@ -7,8 +7,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/knqyf263/go-plugin/examples/host-functions/greeting"
-	"github.com/knqyf263/go-plugin/types/known/emptypb"
+	"github.com/runtime-radar/go-plugin/examples/host-functions/greeting"
+	"github.com/runtime-radar/go-plugin/types/known/emptypb"
 )
 
 func main() {

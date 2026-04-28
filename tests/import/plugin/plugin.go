@@ -5,8 +5,8 @@ package main
 import (
 	"context"
 
-	"github.com/knqyf263/go-plugin/tests/import/proto/bar"
-	"github.com/knqyf263/go-plugin/tests/import/proto/foo"
+	"github.com/runtime-radar/go-plugin/tests/import/proto/bar"
+	"github.com/runtime-radar/go-plugin/tests/import/proto/foo"
 )
 
 // main is required for Go to compile to Wasm.

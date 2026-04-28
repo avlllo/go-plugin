@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/knqyf263/go-plugin/examples/wasi/cat"
+	"github.com/runtime-radar/go-plugin/examples/wasi/cat"
 )
 
 // main is required for Go to compile to Wasm.

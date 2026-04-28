@@ -5,7 +5,7 @@
 
 syntax = "proto3";
 
-option go_package = "github.com/knqyf263/go-plugin/types/known/anypb";
+option go_package = "github.com/runtime-radar/go-plugin/types/known/anypb";
 
 // `Any` contains an arbitrary serialized protocol buffer message along with a
 // URL that describes the type of the serialized message.

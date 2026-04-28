@@ -9,9 +9,9 @@ import (
 
 	"github.com/tetratelabs/wazero"
 
-	"github.com/knqyf263/go-plugin/examples/known-types/known"
-	"github.com/knqyf263/go-plugin/types/known/structpb"
-	"github.com/knqyf263/go-plugin/types/known/timestamppb"
+	"github.com/runtime-radar/go-plugin/examples/known-types/known"
+	"github.com/runtime-radar/go-plugin/types/known/structpb"
+	"github.com/runtime-radar/go-plugin/types/known/timestamppb"
 )
 
 func main() {

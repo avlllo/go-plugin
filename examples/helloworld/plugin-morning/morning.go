@@ -5,7 +5,7 @@ package main
 import (
 	"context"
 
-	"github.com/knqyf263/go-plugin/examples/helloworld/greeting"
+	"github.com/runtime-radar/go-plugin/examples/helloworld/greeting"
 )
 
 func main() {}

@@ -11,9 +11,9 @@ import (
 
 	"github.com/tetratelabs/wazero"
 
-	"github.com/knqyf263/go-plugin/examples/host-function-library/library/json-parser/export"
-	"github.com/knqyf263/go-plugin/examples/host-function-library/library/json-parser/impl"
-	"github.com/knqyf263/go-plugin/examples/host-function-library/proto"
+	"github.com/runtime-radar/go-plugin/examples/host-function-library/library/json-parser/export"
+	"github.com/runtime-radar/go-plugin/examples/host-function-library/library/json-parser/impl"
+	"github.com/runtime-radar/go-plugin/examples/host-function-library/proto"
 )
 
 func main() {

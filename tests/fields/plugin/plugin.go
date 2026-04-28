@@ -6,8 +6,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/knqyf263/go-plugin/tests/fields/proto"
-	"github.com/knqyf263/go-plugin/types/known/emptypb"
+	"github.com/runtime-radar/go-plugin/tests/fields/proto"
+	"github.com/runtime-radar/go-plugin/types/known/emptypb"
 )
 
 // main is required for Go to compile to Wasm.

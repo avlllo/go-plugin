@@ -10,7 +10,7 @@ package google.protobuf;
 import "google/protobuf/any.proto";
 import "google/protobuf/source_context.proto";
 
-option go_package = "github.com/knqyf263/go-plugin/types/known/typepb";
+option go_package = "github.com/runtime-radar/go-plugin/types/known/typepb";
 
 // A protocol buffer message type.
 message Type {

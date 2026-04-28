@@ -4,6 +4,7 @@
 package gen
 
 import (
+	"bytes"
 	"fmt"
 	"go/ast"
 	"go/parser"
@@ -14,19 +15,19 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	_ "github.com/planetscale/vtprotobuf/features/marshal"
-	_ "github.com/planetscale/vtprotobuf/features/size"
-	_ "github.com/planetscale/vtprotobuf/features/unmarshal"
-	vtgenerator "github.com/planetscale/vtprotobuf/generator"
+	_ "github.com/runtime-radar/vtprotobuf/features/marshal"
+	_ "github.com/runtime-radar/vtprotobuf/features/size"
+	_ "github.com/runtime-radar/vtprotobuf/features/unmarshal"
+	vtgenerator "github.com/runtime-radar/vtprotobuf/generator"
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/runtime/protoimpl"
 	"google.golang.org/protobuf/types/descriptorpb"
 	"google.golang.org/protobuf/types/pluginpb"
 
-	"github.com/knqyf263/go-plugin/encoding/tag"
-	"github.com/knqyf263/go-plugin/genid"
-	"github.com/knqyf263/go-plugin/version"
+	"github.com/runtime-radar/go-plugin/encoding/tag"
+	"github.com/runtime-radar/go-plugin/genid"
+	"github.com/runtime-radar/go-plugin/version"
 )
 
 // SupportedFeatures reports the set of supported protobuf language features.
@@ -76,7 +77,7 @@ var (
 	wazeroSysPackage  goImportPath = protogen.GoImportPath("github.com/tetratelabs/wazero/sys")
 	wazeroWasiPackage goImportPath = protogen.GoImportPath("github.com/tetratelabs/wazero/imports/wasi_snapshot_preview1")
 
-	pluginWasmPackage goImportPath = protogen.GoImportPath("github.com/knqyf263/go-plugin/wasm")
+	pluginWasmPackage goImportPath = protogen.GoImportPath("github.com/runtime-radar/go-plugin/wasm")
 )
 
 type goImportPath interface {
@@ -94,13 +95,19 @@ type Options struct {
 }
 
 func NewGenerator(plugin *protogen.Plugin) (*Generator, error) {
-	ext := &vtgenerator.Extensions{}
+	g := &Generator{plugin: plugin}
+
+	cfg := &vtgenerator.Config{
+		WKTImportRewrite: true,
+		FileEmitter:      g.rewriteVTHeader,
+	}
 	featureNames := []string{"marshal", "unmarshal", "size"}
 
-	vtgen, err := vtgenerator.NewGenerator(plugin.Files, featureNames, ext)
+	vtgen, err := vtgenerator.NewGenerator(plugin, featureNames, cfg)
 	if err != nil {
 		return nil, err
 	}
+	g.vtgen = vtgen
 
 	for _, f := range plugin.Files {
 		if !f.Generate {
@@ -123,10 +130,34 @@ func NewGenerator(plugin *protogen.Plugin) (*Generator, error) {
 		}
 	}
 
-	return &Generator{
-		plugin: plugin,
-		vtgen:  vtgen,
-	}, nil
+	// vtproto v0.6.0 only exposes Generate(); call it once after import rewrites.
+	vtgen.Generate()
+
+	return g, nil
+}
+
+// rewriteVTHeader replaces vtproto's auto-generated header with the project's
+// standard header. It renders generateHeader into a throwaway file, then
+// strips bytes up to (but not including) the import block in vtproto's
+// content and concatenates them.
+func (gg *Generator) rewriteVTHeader(file *protogen.File, content []byte) []byte {
+	f := gg.newFileInfo(file)
+
+	headerFile := gg.plugin.NewGeneratedFile(
+		file.GeneratedFilenamePrefix+"_vtproto_header.tmp", file.GoImportPath)
+	gg.generateHeader(headerFile, f)
+	header, err := headerFile.Content()
+	headerFile.Skip()
+	if err != nil {
+		gg.plugin.Error(err)
+		return content
+	}
+
+	bodyIdx := bytes.Index(content, []byte("\nimport "))
+	if bodyIdx < 0 {
+		return content
+	}
+	return append(header, content[bodyIdx+1:]...)
 }
 
 func replaceImport(m *protogen.Message) {
@@ -136,7 +167,7 @@ func replaceImport(m *protogen.Message) {
 	if strings.HasPrefix(string(m.GoIdent.GoImportPath), knownTypesPrefix) {
 		m.GoIdent.GoImportPath = protogen.GoImportPath(
 			strings.ReplaceAll(string(m.GoIdent.GoImportPath),
-				knownTypesPrefix, "github.com/knqyf263/go-plugin/types/known/"),
+				knownTypesPrefix, "github.com/runtime-radar/go-plugin/types/known/"),
 		)
 	}
 }
@@ -147,7 +178,6 @@ func (gg *Generator) GenerateFiles(file *protogen.File, opts Options) *protogen.
 	gg.generatePBFile(f, opts.DisablePBGen)
 	gg.generateHostFile(f)
 	gg.generatePluginFile(f)
-	gg.generateVTFile(f)
 	gg.generateOptionsFile(f)
 	return nil
 }

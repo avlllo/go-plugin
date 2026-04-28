@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/knqyf263/go-plugin/examples/host-function-library/library/json-parser/export"
-	"github.com/knqyf263/go-plugin/examples/host-function-library/proto"
+	"github.com/runtime-radar/go-plugin/examples/host-function-library/library/json-parser/export"
+	"github.com/runtime-radar/go-plugin/examples/host-function-library/proto"
 )
 
 // main is required for Go to compile to Wasm.

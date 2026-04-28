@@ -1,7 +1,7 @@
 syntax = "proto3";
 package greeting;
 
-option go_package = "github.com/knqyf263/go-plugin/examples/helloworld/greeting";
+option go_package = "github.com/runtime-radar/go-plugin/examples/helloworld/greeting";
 
 // The greeting service definition.
 // go:plugin type=plugin version=1

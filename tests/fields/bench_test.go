@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/knqyf263/go-plugin/tests/fields/proto"
+	"github.com/runtime-radar/go-plugin/tests/fields/proto"
 )
 
 func BenchmarkFields(b *testing.B) {

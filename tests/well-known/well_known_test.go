@@ -11,6 +11,7 @@ import (
 	"github.com/runtime-radar/go-plugin/tests/well-known/proto"
 	"github.com/runtime-radar/go-plugin/types/known/durationpb"
 	"github.com/runtime-radar/go-plugin/types/known/emptypb"
+	"github.com/runtime-radar/go-plugin/types/known/fieldmaskpb"
 	"github.com/runtime-radar/go-plugin/types/known/structpb"
 	"github.com/runtime-radar/go-plugin/types/known/timestamppb"
 	"github.com/runtime-radar/go-plugin/types/known/wrapperspb"
@@ -63,6 +64,9 @@ func TestWellKnownTypes(t *testing.T) {
 		J: wrapperspb.String("String"),
 		K: wrapperspb.UInt32(3),
 		L: wrapperspb.UInt64(4),
+
+		// field mask
+		M: &fieldmaskpb.FieldMask{Paths: []string{"foo", "bar.baz"}},
 	})
 
 	c, err = structpb.NewValue(map[string]interface{}{
@@ -96,6 +100,7 @@ func TestWellKnownTypes(t *testing.T) {
 		J: wrapperspb.String("StringValue"),
 		K: wrapperspb.UInt32(6),
 		L: wrapperspb.UInt64(8),
+		M: &fieldmaskpb.FieldMask{Paths: []string{"foo", "bar.baz", "added.by_plugin"}},
 	}
 	assert.Equal(t, want, got)
 }

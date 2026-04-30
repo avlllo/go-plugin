@@ -460,7 +460,7 @@ Welcome your contribution :)
   - [x] Field
   - [x] Field_Cardinality
   - [x] Field_Kind
-  - [ ] FieldMask
+  - [x] FieldMask
   - [x] FloatValue
   - [x] Int32Value
   - [x] Int64Value

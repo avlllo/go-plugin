@@ -3,6 +3,7 @@ package greeting;
 
 import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
@@ -39,6 +40,9 @@ message Request {
   google.protobuf.StringValue j = 10;
   google.protobuf.UInt32Value k = 11;
   google.protobuf.UInt64Value l = 12;
+
+  // field mask
+  google.protobuf.FieldMask m = 13;
 }
 
 message Response {
@@ -54,4 +58,5 @@ message Response {
   google.protobuf.StringValue j = 10;
   google.protobuf.UInt32Value k = 11;
   google.protobuf.UInt64Value l = 12;
+  google.protobuf.FieldMask   m = 13;
 }

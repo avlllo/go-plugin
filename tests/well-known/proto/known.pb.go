@@ -10,6 +10,7 @@ import (
 	context "context"
 	durationpb "github.com/runtime-radar/go-plugin/types/known/durationpb"
 	emptypb "github.com/runtime-radar/go-plugin/types/known/emptypb"
+	fieldmaskpb "github.com/runtime-radar/go-plugin/types/known/fieldmaskpb"
 	structpb "github.com/runtime-radar/go-plugin/types/known/structpb"
 	timestamppb "github.com/runtime-radar/go-plugin/types/known/timestamppb"
 	wrapperspb "github.com/runtime-radar/go-plugin/types/known/wrapperspb"
@@ -45,6 +46,8 @@ type Request struct {
 	J *wrapperspb.StringValue `protobuf:"bytes,10,opt,name=j,proto3" json:"j,omitempty"`
 	K *wrapperspb.UInt32Value `protobuf:"bytes,11,opt,name=k,proto3" json:"k,omitempty"`
 	L *wrapperspb.UInt64Value `protobuf:"bytes,12,opt,name=l,proto3" json:"l,omitempty"`
+	// field mask
+	M *fieldmaskpb.FieldMask `protobuf:"bytes,13,opt,name=m,proto3" json:"m,omitempty"`
 }
 
 func (x *Request) ProtoReflect() protoreflect.Message {
@@ -135,6 +138,13 @@ func (x *Request) GetL() *wrapperspb.UInt64Value {
 	return nil
 }
 
+func (x *Request) GetM() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.M
+	}
+	return nil
+}
+
 type Response struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -152,6 +162,7 @@ type Response struct {
 	J *wrapperspb.StringValue `protobuf:"bytes,10,opt,name=j,proto3" json:"j,omitempty"`
 	K *wrapperspb.UInt32Value `protobuf:"bytes,11,opt,name=k,proto3" json:"k,omitempty"`
 	L *wrapperspb.UInt64Value `protobuf:"bytes,12,opt,name=l,proto3" json:"l,omitempty"`
+	M *fieldmaskpb.FieldMask  `protobuf:"bytes,13,opt,name=m,proto3" json:"m,omitempty"`
 }
 
 func (x *Response) ProtoReflect() protoreflect.Message {
@@ -238,6 +249,13 @@ func (x *Response) GetK() *wrapperspb.UInt32Value {
 func (x *Response) GetL() *wrapperspb.UInt64Value {
 	if x != nil {
 		return x.L
+	}
+	return nil
+}
+
+func (x *Response) GetM() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.M
 	}
 	return nil
 }

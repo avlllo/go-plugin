@@ -9,6 +9,7 @@ import (
 	"github.com/runtime-radar/go-plugin/tests/well-known/proto"
 	"github.com/runtime-radar/go-plugin/types/known/durationpb"
 	"github.com/runtime-radar/go-plugin/types/known/emptypb"
+	"github.com/runtime-radar/go-plugin/types/known/fieldmaskpb"
 	"github.com/runtime-radar/go-plugin/types/known/structpb"
 	"github.com/runtime-radar/go-plugin/types/known/timestamppb"
 	"github.com/runtime-radar/go-plugin/types/known/wrapperspb"
@@ -44,6 +45,7 @@ func (p TestPlugin) Test(_ context.Context, request *proto.Request) (*proto.Resp
 		J: wrapperspb.String(request.GetJ().Value + "Value"),
 		K: wrapperspb.UInt32(request.GetK().Value * 2),
 		L: wrapperspb.UInt64(request.GetL().Value * 2),
+		M: &fieldmaskpb.FieldMask{Paths: append(request.GetM().GetPaths(), "added.by_plugin")},
 	}, nil
 }
 

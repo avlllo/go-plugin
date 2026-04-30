@@ -9,6 +9,7 @@ package proto
 import (
 	fmt "fmt"
 	durationpb "github.com/runtime-radar/go-plugin/types/known/durationpb"
+	fieldmaskpb "github.com/runtime-radar/go-plugin/types/known/fieldmaskpb"
 	structpb "github.com/runtime-radar/go-plugin/types/known/structpb"
 	timestamppb "github.com/runtime-radar/go-plugin/types/known/timestamppb"
 	wrapperspb "github.com/runtime-radar/go-plugin/types/known/wrapperspb"
@@ -53,6 +54,16 @@ func (m *Request) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.M != nil {
+		size, err := (*fieldmaskpb.FieldMask)(m.M).MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x6a
 	}
 	if m.L != nil {
 		size, err := (*wrapperspb.UInt64Value)(m.L).MarshalToSizedBufferVT(dAtA[:i])
@@ -206,6 +217,16 @@ func (m *Response) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.M != nil {
+		size, err := (*fieldmaskpb.FieldMask)(m.M).MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x6a
 	}
 	if m.L != nil {
 		size, err := (*wrapperspb.UInt64Value)(m.L).MarshalToSizedBufferVT(dAtA[:i])
@@ -384,6 +405,10 @@ func (m *Request) SizeVT() (n int) {
 		l = (*wrapperspb.UInt64Value)(m.L).SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
+	if m.M != nil {
+		l = (*fieldmaskpb.FieldMask)(m.M).SizeVT()
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -440,6 +465,10 @@ func (m *Response) SizeVT() (n int) {
 	}
 	if m.L != nil {
 		l = (*wrapperspb.UInt64Value)(m.L).SizeVT()
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	if m.M != nil {
+		l = (*fieldmaskpb.FieldMask)(m.M).SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
@@ -904,6 +933,42 @@ func (m *Request) UnmarshalVT(dAtA []byte) error {
 				m.L = &wrapperspb.UInt64Value{}
 			}
 			if err := (*wrapperspb.UInt64Value)(m.L).UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 13:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field M", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.M == nil {
+				m.M = &fieldmaskpb.FieldMask{}
+			}
+			if err := (*fieldmaskpb.FieldMask)(m.M).UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -1387,6 +1452,42 @@ func (m *Response) UnmarshalVT(dAtA []byte) error {
 				m.L = &wrapperspb.UInt64Value{}
 			}
 			if err := (*wrapperspb.UInt64Value)(m.L).UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 13:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field M", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.M == nil {
+				m.M = &fieldmaskpb.FieldMask{}
+			}
+			if err := (*fieldmaskpb.FieldMask)(m.M).UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

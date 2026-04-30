@@ -16,6 +16,7 @@ import (
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"
+	io "io"
 	os "os"
 )
 
@@ -47,12 +48,23 @@ type fieldTest interface {
 	FieldTest
 }
 
-func (p *FieldTestPlugin) Load(ctx context.Context, pluginPath string) (fieldTest, error) {
+func (p *FieldTestPlugin) LoadPath(ctx context.Context, pluginPath string) (fieldTest, error) {
 	b, err := os.ReadFile(pluginPath)
 	if err != nil {
 		return nil, err
 	}
+	return p.LoadBinary(ctx, b)
+}
 
+func (p *FieldTestPlugin) LoadReader(ctx context.Context, reader io.Reader) (fieldTest, error) {
+	b, err := io.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+	return p.LoadBinary(ctx, b)
+}
+
+func (p *FieldTestPlugin) LoadBinary(ctx context.Context, b []byte) (fieldTest, error) {
 	// Create a new runtime so that multiple modules will not conflict
 	r, err := p.newRuntime(ctx)
 	if err != nil {

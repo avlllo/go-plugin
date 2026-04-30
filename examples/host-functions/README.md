@@ -63,11 +63,11 @@ func (myHostFunctions) Log(ctx context.Context, request greeting.LogRequest) (em
 }
 ```
 
-Pass it to a plugin in `Load()`.
+Pass it to a plugin in `LoadPath()`.
 
 ```go
 // Pass my host functions that are embedded into the plugin.
-greetingPlugin, err := p.Load(ctx, "plugin/plugin.wasm", myHostFunctions{})
+greetingPlugin, err := p.LoadPath(ctx, "plugin/plugin.wasm", myHostFunctions{})
 ```
 
 ## Call host functions in a plugin

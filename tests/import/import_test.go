@@ -16,7 +16,7 @@ func TestImport(t *testing.T) {
 	p, err := foo.NewFooPlugin(ctx)
 	require.NoError(t, err)
 
-	plugin, err := p.Load(ctx, "plugin/plugin.wasm")
+	plugin, err := p.LoadPath(ctx, "plugin/plugin.wasm")
 	require.NoError(t, err)
 	defer plugin.Close(ctx)
 

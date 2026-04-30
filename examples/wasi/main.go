@@ -34,7 +34,7 @@ func run() error {
 		return err
 	}
 
-	wasiPlugin, err := p.Load(ctx, "plugin/plugin.wasm")
+	wasiPlugin, err := p.LoadPath(ctx, "plugin/plugin.wasm")
 	if err != nil {
 		return err
 	}

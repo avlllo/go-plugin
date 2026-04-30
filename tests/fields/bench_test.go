@@ -15,7 +15,7 @@ func BenchmarkFields(b *testing.B) {
 		b.Fatal(err)
 	}
 
-	plugin, err := p.Load(ctx, "plugin/plugin.wasm")
+	plugin, err := p.LoadPath(ctx, "plugin/plugin.wasm")
 	if err != nil {
 		b.Fatal(err)
 	}

@@ -161,9 +161,10 @@ func genHost(g *protogen.GeneratedFile, f *fileInfo, service *serviceInfo) {
 
 	// Plugin loading
 	structName := strings.ToLower(service.GoName[:1]) + service.GoName[1:]
-	var hostFunctionsArg, exportHostFunctions string
+	var hostFunctionsArg, hostFunctionsCallArg, exportHostFunctions string
 	if f.hostService != nil {
 		hostFunctionsArg = ", hostFunctions " + f.hostService.GoName
+		hostFunctionsCallArg = ", hostFunctions"
 		exportHostFunctions = `
 		h := _` + strings.ToLower(f.hostService.GoName[:1]) + f.hostService.GoName[1:] + `{hostFunctions}
 
@@ -183,19 +184,52 @@ func genHost(g *protogen.GeneratedFile, f *fileInfo, service *serviceInfo) {
 		service.GoName,
 	))
 
-	g.P(fmt.Sprintf("func (p *%s) Load(ctx %s, pluginPath string %s) (%s, error) {",
+	// LoadPath: read file, delegate to LoadBinary.
+	g.P(fmt.Sprintf("func (p *%s) LoadPath(ctx %s, pluginPath string %s) (%s, error) {",
+		pluginName,
+		g.QualifiedGoIdent(contextPackage.Ident("Context")),
+		hostFunctionsArg,
+		structName,
+	))
+	g.P(fmt.Sprintf(`b, err := %s(pluginPath)
+		if err != nil {
+			return nil, err
+		}
+		return p.LoadBinary(ctx, b%s)
+	}
+`,
+		g.QualifiedGoIdent(osPackage.Ident("ReadFile")),
+		hostFunctionsCallArg,
+	))
+
+	// LoadReader: read all, delegate to LoadBinary.
+	g.P(fmt.Sprintf("func (p *%s) LoadReader(ctx %s, reader %s %s) (%s, error) {",
+		pluginName,
+		g.QualifiedGoIdent(contextPackage.Ident("Context")),
+		g.QualifiedGoIdent(ioPackage.Ident("Reader")),
+		hostFunctionsArg,
+		structName,
+	))
+	g.P(fmt.Sprintf(`b, err := %s(reader)
+		if err != nil {
+			return nil, err
+		}
+		return p.LoadBinary(ctx, b%s)
+	}
+`,
+		g.QualifiedGoIdent(ioPackage.Ident("ReadAll")),
+		hostFunctionsCallArg,
+	))
+
+	// LoadBinary: canonical implementation.
+	g.P(fmt.Sprintf("func (p *%s) LoadBinary(ctx %s, b []byte %s) (%s, error) {",
 		pluginName,
 		g.QualifiedGoIdent(contextPackage.Ident("Context")),
 		hostFunctionsArg,
 		structName,
 	))
 
-	g.P(fmt.Sprintf(`b, err := %s(pluginPath)
-		if err != nil {
-			return nil, err
-		}
-
-		// Create a new runtime so that multiple modules will not conflict
+	g.P(fmt.Sprintf(`// Create a new runtime so that multiple modules will not conflict
 		r, err := p.newRuntime(ctx)
 		if err != nil {
 			return nil, err
@@ -207,7 +241,7 @@ func genHost(g *protogen.GeneratedFile, f *fileInfo, service *serviceInfo) {
 		if err != nil {
 			return nil, err
 		}
-	
+
 		// InstantiateModule runs the "_start" function, WASI's "main".
 		module, err := r.InstantiateModule(ctx, code, p.moduleConfig)
 		if err != nil {
@@ -235,7 +269,6 @@ func genHost(g *protogen.GeneratedFile, f *fileInfo, service *serviceInfo) {
 			return nil, fmt.Errorf("API version mismatch, host: %%d, plugin: %%d", %sAPIVersion, results[0])
 		}
 `,
-		g.QualifiedGoIdent(osPackage.Ident("ReadFile")),
 		exportHostFunctions,
 		g.QualifiedGoIdent(wazeroSysPackage.Ident("ExitError")),
 		g.QualifiedGoIdent(fmtPackage.Ident("Errorf")),

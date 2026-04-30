@@ -24,13 +24,13 @@ func run() error {
 		return err
 	}
 
-	morningPlugin, err := p.Load(ctx, "plugin-morning/morning.wasm")
+	morningPlugin, err := p.LoadPath(ctx, "plugin-morning/morning.wasm")
 	if err != nil {
 		return err
 	}
 	defer morningPlugin.Close(ctx)
 
-	eveningPlugin, err := p.Load(ctx, "plugin-evening/evening.wasm")
+	eveningPlugin, err := p.LoadPath(ctx, "plugin-evening/evening.wasm")
 	if err != nil {
 		return err
 	}

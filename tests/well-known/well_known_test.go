@@ -22,7 +22,7 @@ func TestWellKnownTypes(t *testing.T) {
 	p, err := proto.NewKnownTypesTestPlugin(ctx)
 	require.NoError(t, err)
 
-	plugin, err := p.Load(ctx, "plugin/plugin.wasm")
+	plugin, err := p.LoadPath(ctx, "plugin/plugin.wasm")
 	require.NoError(t, err)
 	defer plugin.Close(ctx)
 
@@ -110,7 +110,7 @@ func TestEmpty(t *testing.T) {
 	p, err := proto.NewEmptyTestPlugin(ctx)
 	require.NoError(t, err)
 
-	plugin, err := p.Load(ctx, "plugin/plugin.wasm")
+	plugin, err := p.LoadPath(ctx, "plugin/plugin.wasm")
 	require.NoError(t, err)
 	defer plugin.Close(ctx)
 

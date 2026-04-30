@@ -16,6 +16,7 @@ import (
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"
+	io "io"
 	os "os"
 )
 
@@ -47,12 +48,23 @@ type foo interface {
 	Foo
 }
 
-func (p *FooPlugin) Load(ctx context.Context, pluginPath string) (foo, error) {
+func (p *FooPlugin) LoadPath(ctx context.Context, pluginPath string) (foo, error) {
 	b, err := os.ReadFile(pluginPath)
 	if err != nil {
 		return nil, err
 	}
+	return p.LoadBinary(ctx, b)
+}
 
+func (p *FooPlugin) LoadReader(ctx context.Context, reader io.Reader) (foo, error) {
+	b, err := io.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+	return p.LoadBinary(ctx, b)
+}
+
+func (p *FooPlugin) LoadBinary(ctx context.Context, b []byte) (foo, error) {
 	// Create a new runtime so that multiple modules will not conflict
 	r, err := p.newRuntime(ctx)
 	if err != nil {

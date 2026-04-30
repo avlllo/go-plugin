@@ -15,6 +15,7 @@ import (
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"
+	io "io"
 	os "os"
 )
 
@@ -46,12 +47,23 @@ type bar interface {
 	Bar
 }
 
-func (p *BarPlugin) Load(ctx context.Context, pluginPath string) (bar, error) {
+func (p *BarPlugin) LoadPath(ctx context.Context, pluginPath string) (bar, error) {
 	b, err := os.ReadFile(pluginPath)
 	if err != nil {
 		return nil, err
 	}
+	return p.LoadBinary(ctx, b)
+}
 
+func (p *BarPlugin) LoadReader(ctx context.Context, reader io.Reader) (bar, error) {
+	b, err := io.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+	return p.LoadBinary(ctx, b)
+}
+
+func (p *BarPlugin) LoadBinary(ctx context.Context, b []byte) (bar, error) {
 	// Create a new runtime so that multiple modules will not conflict
 	r, err := p.newRuntime(ctx)
 	if err != nil {

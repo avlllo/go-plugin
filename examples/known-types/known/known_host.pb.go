@@ -15,6 +15,7 @@ import (
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"
+	io "io"
 	os "os"
 )
 
@@ -46,12 +47,23 @@ type wellKnown interface {
 	WellKnown
 }
 
-func (p *WellKnownPlugin) Load(ctx context.Context, pluginPath string) (wellKnown, error) {
+func (p *WellKnownPlugin) LoadPath(ctx context.Context, pluginPath string) (wellKnown, error) {
 	b, err := os.ReadFile(pluginPath)
 	if err != nil {
 		return nil, err
 	}
+	return p.LoadBinary(ctx, b)
+}
 
+func (p *WellKnownPlugin) LoadReader(ctx context.Context, reader io.Reader) (wellKnown, error) {
+	b, err := io.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+	return p.LoadBinary(ctx, b)
+}
+
+func (p *WellKnownPlugin) LoadBinary(ctx context.Context, b []byte) (wellKnown, error) {
 	// Create a new runtime so that multiple modules will not conflict
 	r, err := p.newRuntime(ctx)
 	if err != nil {

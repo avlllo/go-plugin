@@ -21,7 +21,7 @@ func TestHostFunctions(t *testing.T) {
 	require.NoError(t, err)
 
 	// Pass my host functions that are embedded into the plugin.
-	plugin, err := p.Load(ctx, "plugin/plugin.wasm", myHostFunctions{})
+	plugin, err := p.LoadPath(ctx, "plugin/plugin.wasm", myHostFunctions{})
 	require.NoError(t, err)
 	defer plugin.Close(ctx)
 
@@ -42,7 +42,7 @@ func TestStd(t *testing.T) {
 	}), proto.WazeroModuleConfig(mc))
 	require.NoError(t, err)
 
-	plugin, err := p.Load(ctx, "plugin-std/plugin.wasm", nil)
+	plugin, err := p.LoadPath(ctx, "plugin-std/plugin.wasm", nil)
 	require.NoError(t, err)
 	defer plugin.Close(ctx)
 
@@ -60,7 +60,7 @@ func TestEmptyRequest(t *testing.T) {
 	p, err := proto.NewGreeterPlugin(ctx)
 	require.NoError(t, err)
 
-	plugin, err := p.Load(ctx, "plugin-empty/plugin.wasm", myEmptyHostFunctions{})
+	plugin, err := p.LoadPath(ctx, "plugin-empty/plugin.wasm", myEmptyHostFunctions{})
 	require.NoError(t, err)
 	defer plugin.Close(ctx)
 

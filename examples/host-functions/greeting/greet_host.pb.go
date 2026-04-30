@@ -16,6 +16,7 @@ import (
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"
+	io "io"
 	os "os"
 )
 
@@ -132,12 +133,23 @@ type greeter interface {
 	Greeter
 }
 
-func (p *GreeterPlugin) Load(ctx context.Context, pluginPath string, hostFunctions HostFunctions) (greeter, error) {
+func (p *GreeterPlugin) LoadPath(ctx context.Context, pluginPath string, hostFunctions HostFunctions) (greeter, error) {
 	b, err := os.ReadFile(pluginPath)
 	if err != nil {
 		return nil, err
 	}
+	return p.LoadBinary(ctx, b, hostFunctions)
+}
 
+func (p *GreeterPlugin) LoadReader(ctx context.Context, reader io.Reader, hostFunctions HostFunctions) (greeter, error) {
+	b, err := io.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+	return p.LoadBinary(ctx, b, hostFunctions)
+}
+
+func (p *GreeterPlugin) LoadBinary(ctx context.Context, b []byte, hostFunctions HostFunctions) (greeter, error) {
 	// Create a new runtime so that multiple modules will not conflict
 	r, err := p.newRuntime(ctx)
 	if err != nil {

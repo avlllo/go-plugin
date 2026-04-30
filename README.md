@@ -224,7 +224,7 @@ func main() {
 	defer p.Close(ctx)
 
 	// Load a plugin
-	plugin, err := p.Load(ctx, "path/to/plugin.wasm")
+	plugin, err := p.LoadPath(ctx, "path/to/plugin.wasm")
 	if err != nil {...}
 
 	// Call SayHello
@@ -274,7 +274,7 @@ service HostFunctions {
 **NOTE:** the service for host functions must be defined in the same file where other plugin services are defined.
 
 Let's say `Greeter` is defined in the same file as `HostFunctions`.
-Then, `Load()` will be able to take `HostFunctions` as an argument as mentioned later.
+Then, `LoadPath()` will be able to take `HostFunctions` as an argument as mentioned later.
 
 ```protobuf
 // go:plugin type=plugin version=1
@@ -305,10 +305,10 @@ func (myHostFunctions) HttpGet(ctx context.Context, request greeting.HttpGetRequ
 ```
 
 And pass it when loading a plugin.
-As described above, `Load()` takes the `HostFunctions` interface.
+As described above, `LoadPath()` takes the `HostFunctions` interface.
 
 ```go
-greetingPlugin, err := p.Load(ctx, "plugin/plugin.wasm", myHostFunctions{})
+greetingPlugin, err := p.LoadPath(ctx, "plugin/plugin.wasm", myHostFunctions{})
 ```
 
 Now, plugins can call `HttpGet()`.

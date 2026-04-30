@@ -16,6 +16,7 @@ import (
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"
+	io "io"
 	os "os"
 )
 
@@ -47,12 +48,23 @@ type knownTypesTest interface {
 	KnownTypesTest
 }
 
-func (p *KnownTypesTestPlugin) Load(ctx context.Context, pluginPath string) (knownTypesTest, error) {
+func (p *KnownTypesTestPlugin) LoadPath(ctx context.Context, pluginPath string) (knownTypesTest, error) {
 	b, err := os.ReadFile(pluginPath)
 	if err != nil {
 		return nil, err
 	}
+	return p.LoadBinary(ctx, b)
+}
 
+func (p *KnownTypesTestPlugin) LoadReader(ctx context.Context, reader io.Reader) (knownTypesTest, error) {
+	b, err := io.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+	return p.LoadBinary(ctx, b)
+}
+
+func (p *KnownTypesTestPlugin) LoadBinary(ctx context.Context, b []byte) (knownTypesTest, error) {
 	// Create a new runtime so that multiple modules will not conflict
 	r, err := p.newRuntime(ctx)
 	if err != nil {
@@ -215,12 +227,23 @@ type emptyTest interface {
 	EmptyTest
 }
 
-func (p *EmptyTestPlugin) Load(ctx context.Context, pluginPath string) (emptyTest, error) {
+func (p *EmptyTestPlugin) LoadPath(ctx context.Context, pluginPath string) (emptyTest, error) {
 	b, err := os.ReadFile(pluginPath)
 	if err != nil {
 		return nil, err
 	}
+	return p.LoadBinary(ctx, b)
+}
 
+func (p *EmptyTestPlugin) LoadReader(ctx context.Context, reader io.Reader) (emptyTest, error) {
+	b, err := io.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+	return p.LoadBinary(ctx, b)
+}
+
+func (p *EmptyTestPlugin) LoadBinary(ctx context.Context, b []byte) (emptyTest, error) {
 	// Create a new runtime so that multiple modules will not conflict
 	r, err := p.newRuntime(ctx)
 	if err != nil {

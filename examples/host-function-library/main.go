@@ -33,7 +33,7 @@ func run() error {
 	}))
 
 	// Pass my host functions that are embedded into the plugin.
-	plugin, err := p.Load(ctx, "plugin/plugin.wasm", myHostFunctions{})
+	plugin, err := p.LoadPath(ctx, "plugin/plugin.wasm", myHostFunctions{})
 	if err != nil {
 		return err
 	}

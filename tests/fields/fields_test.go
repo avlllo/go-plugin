@@ -16,7 +16,7 @@ func TestFields(t *testing.T) {
 	p, err := proto.NewFieldTestPlugin(ctx)
 	require.NoError(t, err)
 
-	plugin, err := p.Load(ctx, "plugin/plugin.wasm")
+	plugin, err := p.LoadPath(ctx, "plugin/plugin.wasm")
 	require.NoError(t, err)
 	defer plugin.Close(ctx)
 
@@ -83,7 +83,7 @@ func TestErrorResponse(t *testing.T) {
 	p, err := proto.NewFieldTestPlugin(ctx)
 	require.NoError(t, err)
 
-	plugin, err := p.Load(ctx, "plugin/plugin.wasm")
+	plugin, err := p.LoadPath(ctx, "plugin/plugin.wasm")
 	require.NoError(t, err)
 	defer plugin.Close(ctx)
 

@@ -15,6 +15,7 @@ import (
 	wazero "github.com/tetratelabs/wazero"
 	api "github.com/tetratelabs/wazero/api"
 	sys "github.com/tetratelabs/wazero/sys"
+	io "io"
 	os "os"
 )
 
@@ -46,12 +47,23 @@ type fileCat interface {
 	FileCat
 }
 
-func (p *FileCatPlugin) Load(ctx context.Context, pluginPath string) (fileCat, error) {
+func (p *FileCatPlugin) LoadPath(ctx context.Context, pluginPath string) (fileCat, error) {
 	b, err := os.ReadFile(pluginPath)
 	if err != nil {
 		return nil, err
 	}
+	return p.LoadBinary(ctx, b)
+}
 
+func (p *FileCatPlugin) LoadReader(ctx context.Context, reader io.Reader) (fileCat, error) {
+	b, err := io.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+	return p.LoadBinary(ctx, b)
+}
+
+func (p *FileCatPlugin) LoadBinary(ctx context.Context, b []byte) (fileCat, error) {
 	// Create a new runtime so that multiple modules will not conflict
 	r, err := p.newRuntime(ctx)
 	if err != nil {
